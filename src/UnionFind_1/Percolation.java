@@ -39,13 +39,13 @@ public class Percolation {
     public void open(int row, int col){
         if(!isOpen(row,col)){
             grid[row - 1][col - 1] = true;
-            openSites += 1;
+            openSites++;
         }
-        
-        matchIfOpen(xyTo1D(row , col), row - 1, col);
-        matchIfOpen(xyTo1D(row , col), row + 1, col);
-        matchIfOpen(xyTo1D(row , col), row, col - 1);
-        matchIfOpen(xyTo1D(row , col), row, col + 1);    
+        int openedNode = xyTo1D(row , col);
+        matchIfOpen(openedNode, row - 1, col);
+        matchIfOpen(openedNode, row + 1, col);
+        matchIfOpen(openedNode, row, col - 1);
+        matchIfOpen(openedNode, row, col + 1);    
         if(row == 1){
             matchIfOpen(topNode, row, col);
         }
