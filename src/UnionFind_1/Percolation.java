@@ -47,11 +47,31 @@ public class Percolation {
         return open.connected(topNode,bottomNode);
     }
     
+<<<<<<< HEAD
     public boolean isFull(int row, int col) {
         if (invalidInput(row , col)) {
 			throw new IllegalArgumentException();
 		} 
         return full.connected(topNode,xyTo1D(row, col)); 
+=======
+    public void open(int row, int col){
+        if(!isOpen(row,col)){
+            grid[row - 1][col - 1] = true;
+            openSites++;
+        }
+        int openedNode = xyTo1D(row , col);
+        matchIfOpen(openedNode, row - 1, col);
+        matchIfOpen(openedNode, row + 1, col);
+        matchIfOpen(openedNode, row, col - 1);
+        matchIfOpen(openedNode, row, col + 1);    
+        if(row == 1){
+            matchIfOpen(topNode, row, col);
+        }
+        if(row == gridSize && isFull(row, col)){
+            matchIfOpen(bottomNode, row, col);
+        }
+        
+>>>>>>> fca5f435b65d23e5c3a4245575496ba4ca8b1fcf
     }
     
     public void open(int row, int col) {
