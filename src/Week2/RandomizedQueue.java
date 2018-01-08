@@ -57,8 +57,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         public Item next() {
-            Item item = list[--loc];
-            return item;           
+            int randomInt = StdRandom.uniform();
+            Item temp = list[randomInt];
+            list[randomInt] = list[--loc];
+            list[loc] = null;
+            return = temp;
         }
     }
     
