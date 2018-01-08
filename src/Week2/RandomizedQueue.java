@@ -13,7 +13,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
        if (N == s.length) resize(2 * s.length);
        //randomly assign new item
        int randomInt = StdRandom.uniform(N);
-       s[N++] = s[randomInt]
+       s[N++] = s[randomInt];
        s[randomInt] = item;
     }
     
@@ -61,7 +61,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             Item temp = list[randomInt];
             list[randomInt] = list[--loc];
             list[loc] = null;
-            return = temp;
+            return temp;
         }
     }
     
