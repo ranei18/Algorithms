@@ -1,47 +1,49 @@
-package Week2;
+import java.util.Iterator;
 
 public class Dequeue<Item> implements Iterable<Item> {
 
-    private Node first, last;
+    private Node first = null;
+    private Node last = null;
     private int size = 0;
 
     private class Node {
-        String item;
+        Item item;
         Node next;
     }
 
     public boolean isEmpty() {
-        return first == null;
+        return size == 0;
     }
     
     public int size() {
         return size;
     }
 
-    public void addLast(String item) {
+    public void addLast(Item item) {
         Node oldLast = last;
         last = new Node();
         last.item = item;
         last.next = null;
-        size++;
+        
         //handles empty queue
         if(isEmpty()) first = last;
         else oldLast.next = last;
+        size++;
     }
     
-    public void addFirst(String item) {
+    public void addFirst(Item item) {
         Node oldFirst = first;
         first = new Node();
         first.item = item;
         first.next = oldFirst;
+        
+        //handles empty queue 
+        if(isEmpty()) last = first;
         size++;
-        //handles empty queue //need to test
-        if(isEmpty()) first = last;
-        else oldFirst.next = last;
     }
 
-    public String removeFirst() {
-        String item = first.item;
+    public Item removeFirst() {
+        Item item = first.item;
         first = first.next;
         size--;
         //handles empty queue
@@ -49,11 +51,11 @@ public class Dequeue<Item> implements Iterable<Item> {
         return item;
     }
     
-    public String removeLast() {
-        String item = last.item;
+    public Item removeLast() {
+        Item item = last.item;
         last = last.next;
         size--;
-        if(isEmpty()) first = null; //is this correct?
+        if(isEmpty()) first = null; 
         return item;
     }
     
@@ -78,7 +80,10 @@ public class Dequeue<Item> implements Iterable<Item> {
     }
     
     public static void main(String[] args) {
-    //unit testing        
+        Dequeue test = new Dequeue();
+        test.addFirst("a");
+        test.removeLast();
+   
     }
     
 }
