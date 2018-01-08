@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.StdRandom;
+
 public class RandomizedQueue {
     private String[] s;
     private int N = 0;
@@ -8,11 +10,19 @@ public class RandomizedQueue {
 
     public void enqueue(String item) {
        if (N == s.length) resize(2 * s.length);
-       //add randomized entry
-       int randomInt = randomInt(0,N - 1); //what's the method?
+       //randomly assign new item
+       int randomInt = StdRandom.uniform(N);
        s[N++] = s[randomInt]
        s[randomInt] = item;
     }
+    
+    public int size() {
+        return N;
+    }
+    
+    public String sample() {
+        return s[StdRandom.uniform(N)];        
+    }    
 
     private void resize (int capacity) {
        String[] copy = new String[capacity];
