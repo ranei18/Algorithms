@@ -53,7 +53,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         private Item[] list = s;
         
         public boolean hasNext() {
-            return list[0] == null;
+            return list[0] != null;
         }
 
         public Item next() {
