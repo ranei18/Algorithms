@@ -55,6 +55,7 @@ public class Dequeue<Item> implements Iterable<Item> {
         Item item = last.item;
         last = last.next;
         size--;
+        //handles empty queue
         if(isEmpty()) first = null; 
         return item;
     }
