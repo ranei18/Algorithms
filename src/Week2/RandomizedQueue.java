@@ -6,7 +6,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int N = 0;
 
    public RandomizedQueue() {
-       s = new Item[1];
+       s = (Item[]) new Object[1];
     }
 
     public void enqueue(Item item) {
