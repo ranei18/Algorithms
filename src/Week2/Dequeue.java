@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Dequeue<Item> implements Iterable<Item> {
+public class Deque<Item> implements Iterable<Item> {
 
     private Node first = null;
     private Node last = null;
@@ -10,6 +10,7 @@ public class Dequeue<Item> implements Iterable<Item> {
     private class Node {
         Item item;
         Node next;
+        Node prev;
     }
 
     public boolean isEmpty() {
@@ -25,11 +26,12 @@ public class Dequeue<Item> implements Iterable<Item> {
         Node oldLast = last;
         last = new Node();
         last.item = item;
-        last.next = null;
+        last.next = oldLast;
+        last.prev = null;
         
         //handles empty queue
         if(isEmpty()) first = last;
-        else oldLast.next = last;
+        else oldLast.prev = last;
         size++;
     }
     
@@ -38,17 +40,19 @@ public class Dequeue<Item> implements Iterable<Item> {
         Node oldFirst = first;
         first = new Node();
         first.item = item;
-        first.next = oldFirst;
+        first.next = null;
+        first.prev = oldFirst;
         
         //handles empty queue 
         if(isEmpty()) last = first;
+        else oldFirst.next = first;
         size++;
     }
 
     public Item removeFirst() {
         if (first == null) throw new NoSuchElementException();
         Item item = first.item;
-        first = first.next;
+        first = first.prev;
         size--;
         //handles empty queue
         if(isEmpty()) last = null;
@@ -81,7 +85,7 @@ public class Dequeue<Item> implements Iterable<Item> {
         public Item next() {
             if (current == null) throw new NoSuchElementException();
             Item item = current.item;
-            current = current.next;
+            current = current.prev;
             return item;
         }
 
@@ -89,12 +93,5 @@ public class Dequeue<Item> implements Iterable<Item> {
             throw new UnsupportedOperationException();
         }
     }
-    
-    public static void main(String[] args) {
-        Dequeue test = new Dequeue();
-        test.addFirst("a");
-        test.removeLast();
-   
-    }
-    
+
 }
