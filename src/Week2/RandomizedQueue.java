@@ -1,5 +1,6 @@
 import edu.princeton.cs.algs4.StdRandom;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] s;
@@ -10,6 +11,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public void enqueue(Item item) {
+       if (item == null) throw new IllegalArgumentException();
        if (N == s.length) resize(2 * s.length);
        //randomly assign new item
        int randomInt = StdRandom.uniform(N);
@@ -18,15 +20,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
     
     public int size() {
-        return N;
+        return N + 1;
     }
     
     public Item sample() {
-        return s[StdRandom.uniform(N)];        
+       //test if this needs to be equal to 0 or less than
+       if (N == 0) throw new NoSuchElementException();
+       return s[StdRandom.uniform(N)];
     }    
 
     private void resize (int capacity) {
-       Item[] copy = new Item[capacity];
+       Item[] copy = (Item[]) new Object[capacity];
        for (int i = 0; i < N; i++) {
            copy[i] = s[i];
        }
@@ -34,6 +38,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public Item dequeue() {
+       if (N == 0) throw new NoSuchElementException();
        Item item = s[--N];
        s[N] = null;
         //wait until array reaches quarter fullness to avoid thrashing
@@ -57,11 +62,16 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         public Item next() {
+            if (loc == 0) throw new NoSuchElementException();
             int randomInt = StdRandom.uniform();
             Item temp = list[randomInt];
             list[randomInt] = list[--loc];
             list[loc] = null;
             return temp;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
     }
     
