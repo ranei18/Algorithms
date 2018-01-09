@@ -11,16 +11,25 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public void enqueue(Item item) {
+	   int randomInt;
        if (item == null) throw new IllegalArgumentException();
        if (N == s.length) resize(2 * s.length);
        //randomly assign new item
-       int randomInt = StdRandom.uniform(N);
+       if (N > 0) {
+           randomInt = StdRandom.uniform(N);
+       } else {
+           randomInt = 0;
+       }
        s[N++] = s[randomInt];
        s[randomInt] = item;
     }
     
     public int size() {
         return N;
+    }
+
+    public boolean isEmpty() {
+       return N == 0;
     }
     
     public Item sample() {
@@ -63,7 +72,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         public Item next() {
             if (loc == 0) throw new NoSuchElementException();
-            int randomInt = StdRandom.uniform();
+            int randomInt = StdRandom.uniform(loc);
             Item temp = list[randomInt];
             list[randomInt] = list[--loc];
             list[loc] = null;
