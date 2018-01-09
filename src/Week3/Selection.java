@@ -22,5 +22,4 @@ public class Selection {
         a[i] = a[j];
         a[j] = swap;
     }
-
 }
