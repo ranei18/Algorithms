@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Dequeue<Item> implements Iterable<Item> {
 
@@ -20,6 +21,7 @@ public class Dequeue<Item> implements Iterable<Item> {
     }
 
     public void addLast(Item item) {
+        if(item == null) throw new IllegalArgumentException();
         Node oldLast = last;
         last = new Node();
         last.item = item;
@@ -32,6 +34,7 @@ public class Dequeue<Item> implements Iterable<Item> {
     }
     
     public void addFirst(Item item) {
+        if(item == null) throw new IllegalArgumentException();
         Node oldFirst = first;
         first = new Node();
         first.item = item;
@@ -43,6 +46,7 @@ public class Dequeue<Item> implements Iterable<Item> {
     }
 
     public Item removeFirst() {
+        if (first == null) throw new NoSuchElementException();
         Item item = first.item;
         first = first.next;
         size--;
@@ -52,6 +56,7 @@ public class Dequeue<Item> implements Iterable<Item> {
     }
     
     public Item removeLast() {
+        if (last == null) throw new NoSuchElementException();
         Item item = last.item;
         last = last.next;
         size--;
@@ -74,9 +79,14 @@ public class Dequeue<Item> implements Iterable<Item> {
         }
 
         public Item next() {
+            if (current == null) throw new NoSuchElementException();
             Item item = current.item;
             current = current.next;
             return item;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
     }
     
