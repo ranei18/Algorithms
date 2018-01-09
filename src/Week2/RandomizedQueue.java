@@ -45,7 +45,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
        }
        s = copy;
     }
-
+    
+    //might be more random to reorder during dequeue
     public Item dequeue() {
        if (N == 0) throw new NoSuchElementException();
        Item item = s[--N];
